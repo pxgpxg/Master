@@ -1,0 +1,120 @@
+<!DOCTYPE html><!--HTML5 doctype-->
+<html>
+<head><!-- the line below is required for access to the appMobi JS library -->
+<script type="text/javascript" charset="utf-8" src="http://localhost:58888/_appMobi/appmobi.js"></script>
+
+<script type="text/javascript" language="javascript">
+        // This event handler is fired once the AppMobi libraries are ready
+        function onDeviceReady() {
+            //use AppMobi viewport to handle device resolution differences if you want
+            //AppMobi.display.useViewport(768,1024);
+
+            //hide splash screen now that our app is ready to run
+            AppMobi.device.hideSplashScreen();
+        }
+
+        //initial event handler to detect when appMobi is ready to roll
+        document.addEventListener("appMobi.device.ready",onDeviceReady,false);
+</script> 
+
+
+
+<title>Plaetzchen</title>
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8">
+    
+    <script type="text/javascript" charset="utf-8" src="_appMobi/appmobi_local_bootstrap.js"></script>
+    <link href="styles.css" rel="stylesheet" type="text/css">    
+    <style type="text/css">
+		* { -webkit-user-select:none; -webkit-tap-highlight-color:rgba(255, 255, 255, 0); -ms-touch-action:none;} 
+        input, textarea  { -webkit-user-select:text; } 
+        body  
+        {
+            font-family:Arial;font-size:32pt;
+            background-image:url('images/background.jpg');
+        }
+        button 
+        {
+        	font-size:32pt;
+        }
+    </style>
+        
+    <script type="text/javascript" language="javascript">
+    //global variables
+    
+    //Initialization function
+    function init()
+    {}
+
+    //*** Prevent Default Scrolling ******
+    preventDefaultScroll = function(event) {
+        // Prevent scrolling on this element
+        event.preventDefault();
+        window.scroll(0,0);
+        return false;
+    };
+    
+    window.document.addEventListener('touchmove', preventDefaultScroll, false);
+        
+    //*** Device Ready Code **********
+    //This event handler is fired once the AppMobi libraries are ready
+    //AppMobi is ready to roll
+    function onDeviceReady()
+    {
+        //use AppMobi viewport
+        AppMobi.display.useViewport(768,1024);
+    
+        //lock orientation
+        AppMobi.device.setRotateOrientation("portrait");
+        AppMobi.device.setAutoRotate(false);
+        
+        //manage power
+        AppMobi.device.managePower(true,false);
+		
+		//hide splash screen
+		AppMobi.device.hideSplashScreen();		
+    }
+    
+    //initial event handler to detect when appMobi is ready to roll
+    document.addEventListener("appMobi.device.ready",onDeviceReady,false); 
+      
+	var oldTC="This sample has detected that you are not using the most up to date appMobi test container.  This sample's functionality may be compromised as a result.  Touch OK to continue. ";
+	window.addEventListener("load", function(){ if (typeof(AppMobiInit) != 'object'){ alert(oldTC); }}, false);
+   
+    function vibrateDevice()
+    {
+        try
+        {
+            AppMobi.notification.vibrate();
+        }
+        catch(e) {} 
+    }
+
+    function music()
+    {
+        try
+        {
+            AppMobi.player.playSound("sounds/bark02.mp3"); 
+        }
+        catch(e) { } 
+    }
+
+    </script>
+
+    
+
+</head>
+
+
+<body onload="init();">
+<img src="images/Logo_Main_Graphic.png" style="width:758px;" />
+
+<br/>
+<span style="text-align:center;width:768px;left:10px;top:60px;">
+    <span id="spnHead" style="font-weight:bold;font-size:48pt;width:768px;text-align:center;">Hello World!</span>
+    <br/>
+    <button id="btnVibrate" ontouchstart="vibrateDevice();">Let it Dance for u </button>
+    <button id="btnBark" ontouchstart="music();">Music</button>
+
+	
+</span>
+</html>
